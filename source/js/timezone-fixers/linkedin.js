@@ -19,6 +19,13 @@ const fixer = new Fixer('LinkedIn', [
     timestamp: _ => extractDateFromPostId(getLIPostId()),
     url: _ => window.location.href
   },
+  {
+    name: "Feed posts",
+    selector: 'div[class*="feed-shared-update-v2--e2e"]',
+    attachTo: node => node,
+    timestamp: node => extractDateFromPostId(getLIPostId(node.getAttribute('data-urn'))),
+    url: _ => window.location.href
+  }
 ])
 
 fixer.start();
